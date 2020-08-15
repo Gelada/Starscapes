@@ -1,15 +1,35 @@
-#######################################################################################
-# Algebraic Starscapes code                                                           #
-# Edmund Harriss, Kate Stange, Steve Trettel and Pierre Arnoux                        #
-#######################################################################################
+r"""
+Algebraic Starscapes
 
-# This provides functions to generate images, primarily of algebraic numbers as 
-# collections of differently sized dots. 
-# Images are constructed in three phases:
-# 1) Create a list of polynomials, as lists themselves
-# 2) Process the data on the polynomials into geometric information, position, size and colour
-# 3) Draw the resulting image
-# A final section provides some simpler functions for common tasks and a function to output images
+Drawing algebraic starscapes of the roots of polynomials (primarily complex roots). 
+Companion to the paper Algebraic Starcapes by Edmund Harriss, Kate Stange and Steve Trettel.
+
+Images are constructed in three phases:
+1) Create a list of polynomials, as lists themselves
+2) Process the data on the polynomials into geometric information, position, size and colour
+3) Draw the resulting images
+A final section provides some simpler functions for common tasks and a function to output images
+
+EXAMPLES:
+
+Make list of polynomials::
+
+Process list into root data::
+
+Draw::
+
+Change colfun::
+
+Change sizefun::
+
+AUTHORS:
+
+- Edmund Harriss (2020) : Initial version work with Pierre Arnoux, Kate Stange and Steve Trettel
+"""
+
+# ****************************************************************************
+#       Copyright (C) 2020 Edmund Harriss <edmund@mathematicians.org.uk>
+# ****************************************************************************
 
 from abc import ABC, abstractmethod
 import matplotlib.pyplot as plt
@@ -21,6 +41,23 @@ import numpy as np
 # Section 1: create lists of polynomials (as a list of values)
 
 def absSum(p):
+    """
+    The sum of the absolute values of a list, p. 
+    
+    INPUT:
+
+    - ``p'' - the list to sum
+    
+    EXAMPLES:
+    
+    sage: absSum([1,2,-1,-3])
+    7
+    
+    AUTHORS:
+    
+    - Edmund Harriss (2020-8-15)
+    
+    """
     t = 0
     for i in p:
         t=t+abs(i)
@@ -28,6 +65,18 @@ def absSum(p):
 
 # all polynomials above a certain degree (minD) with absolute coefficient total up to n
 def upTo(n, minD=None, maxD=None):
+    """
+    Generate all lists of integers up to an absolute sum of n.
+    
+    INPUT:
+
+    - ``n'' - the largest number to sum to
+    
+    AUTHORS:
+    
+    - Edmund Harriss (2020-8-15)
+    
+    """
     if minD == None: 
         minD = 2
     if maxD == None:
